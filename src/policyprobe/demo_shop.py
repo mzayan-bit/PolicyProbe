@@ -13,3 +13,12 @@ def correct_bot(db: sqlite3.Connection, order_id: str, requested_on: date) -> st
         record_refund(db, order_id)
         return "I've refunded your order."
     return "Your return window has closed."
+
+
+def flawed_bot(db: sqlite3.Connection, order_id: str, requested_on: date) -> str:
+    """This shop applies the new window even to older purchases."""
+    purchased_on, _ = order_state(db, order_id)
+    if 0 <= (requested_on - purchased_on).days <= 14:
+        record_refund(db, order_id)
+        return "I've refunded your order."
+    return "Your return window has closed."
