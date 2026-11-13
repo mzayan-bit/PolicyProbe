@@ -27,3 +27,25 @@ def run_demo() -> list[dict]:
                 "passed": after == case.expected_refund,
             })
     return records
+
+
+def main() -> None:
+    import argparse
+    import json
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--json", action="store_true", help="print the full order records")
+    args = parser.parse_args()
+    records = run_demo()
+    if args.json:
+        print(json.dumps(records, indent=2))
+        return
+    for row in records:
+        verdict = "pass" if row["passed"] else "fail"
+        print(f"{verdict:4}  {row['bot']:7}  {row['order']}  "
+              f"refund expected={row['expected_refund']} recorded={row['refunded_after']}  "
+              f"({row['clause']})")
+
+
+if __name__ == "__main__":
+    main()
