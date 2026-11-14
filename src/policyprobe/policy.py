@@ -86,6 +86,16 @@ class Change:
     after: Clause | None
 
 
+def _comparison_text(text: str) -> str:
+    """Normalize prose wrapping and a narrowly scoped rewrite from the return policy."""
+    if any(line.lstrip().startswith(("`", "~", "|", "-", "*", ">"))
+           or line.startswith("    ") for line in text.splitlines()):
+        return text
+    wrapped = " ".join(text.split())
+    return re.sub(r"\bmay be returned within (?=\d+ calendar days of purchase\b)",
+                  "can be returned within ", wrapped)
+
+
 def compare_policies(before: Path, after: Path) -> list[Change]:
     old = read_policy(before)
     new = read_policy(after)
@@ -98,7 +108,10 @@ def compare_policies(before: Path, after: Path) -> list[Change]:
         elif current is None:
             kind = "removed"
         elif previous.text != current.text:
-            kind = "edited"
+            if _comparison_text(previous.text) == _comparison_text(current.text):
+                kind = "wording"
+            else:
+                kind = "edited"
         else:
             continue
         changes.append(Change(kind, previous, current))
