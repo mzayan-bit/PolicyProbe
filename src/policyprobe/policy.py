@@ -1,0 +1,60 @@
+"""Read Markdown policies and keep line references for each version."""
+
+from dataclasses import dataclass
+from pathlib import Path
+import re
+
+
+@dataclass(frozen=True)
+class Clause:
+    document: str
+    headings: tuple[str, ...]
+    occurrence: int
+    line: int
+    text: str
+
+
+def read_policy(folder: Path) -> dict[tuple, Clause]:
+    if not folder.is_dir():
+        raise NotADirectoryError(folder)
+    clauses = {}
+    for path in sorted(folder.rglob("*.md")):
+        document = path.relative_to(folder).as_posix()
+        headings = []
+        body = []
+        occurrences = {}
+        line = 1
+
+        def save():
+            text = "\n".join(body).strip()
+            if text:
+                names = tuple(name for _, name in headings)
+                occurrence = occurrences.get(names, 0) + 1
+                occurrences[names] = occurrence
+                key = (document, names, occurrence)
+                clauses[key] = Clause(*key, line, text)
+
+        fence = ""
+        for number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            stripped = raw.lstrip()
+            if fence:
+                body.append(raw)
+                if re.fullmatch(re.escape(fence[0]) + "{" + str(len(fence)) + ",}", stripped.rstrip()):
+                    fence = ""
+                continue
+            opening = re.match(r"^(`{3,}|~{3,})", stripped)
+            if opening:
+                fence = opening[1]
+            heading = re.fullmatch(r" {0,3}(#{1,6})[ \t]+(.+?)\s*", raw)
+            if not heading:
+                body.append(raw)
+                continue
+            save()
+            level = len(heading[1])
+            while headings and headings[-1][0] >= level:
+                headings.pop()
+            headings.append((level, heading[2]))
+            body = []
+            line = number
+        save()
+    return clauses
