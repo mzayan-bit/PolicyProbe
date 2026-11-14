@@ -58,3 +58,29 @@ def read_policy(folder: Path) -> dict[tuple, Clause]:
             line = number
         save()
     return clauses
+
+
+@dataclass(frozen=True)
+class Change:
+    kind: str
+    before: Clause | None
+    after: Clause | None
+
+
+def compare_policies(before: Path, after: Path) -> list[Change]:
+    old = read_policy(before)
+    new = read_policy(after)
+    changes = []
+    for key in sorted(old.keys() | new.keys()):
+        previous = old.get(key)
+        current = new.get(key)
+        if previous is None:
+            kind = "added"
+        elif current is None:
+            kind = "removed"
+        elif previous.text != current.text:
+            kind = "edited"
+        else:
+            continue
+        changes.append(Change(kind, previous, current))
+    return changes
