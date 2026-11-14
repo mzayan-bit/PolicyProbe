@@ -31,3 +31,19 @@ python -m policyprobe.demo --json > orders.json
 Both shoppers request a return on November 20. The correct shop refunds the October 31 order under the earlier policy and declines the November 1 order. The flawed shop declines both. Look for the single failing row for the October 31 shopper. The JSON output includes the support reply, applicable clause, and refund status before and after each request. Each run uses fresh test orders.
 
 These shoppers and bots are scripted. The expected failure is part of the demonstration. To try the demo with a support team, use the [interview guide](docs/pilot.md).
+
+## Inspect a policy edit
+
+From the repository root after installation:
+
+```python
+from pathlib import Path
+from policyprobe.policy import compare_policies
+
+root = Path("examples/returns")
+for change in compare_policies(root / "before", root / "after"):
+    clause = change.after or change.before
+    print(change.kind, clause.document, clause.line, clause.headings, clause.date_boundaries)
+```
+
+The example reports an added exception and an edited return window. Sections are matched by document path, Markdown heading path, and occurrence. Renames appear as removal and addition. Explicit timing phrases retain their dates. The wording label covers simple prose wrapping and a narrow return-policy paraphrase. Other edits remain available for review.
