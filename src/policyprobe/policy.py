@@ -1,6 +1,7 @@
 """Read Markdown policies and keep line references for each version."""
 
 from dataclasses import dataclass
+from datetime import date, datetime
 from pathlib import Path
 import re
 
@@ -12,6 +13,24 @@ class Clause:
     occurrence: int
     line: int
     text: str
+
+
+    @property
+    def date_boundaries(self) -> list[tuple[str, date]]:
+        """Return explicit timing phrases and dates without inferring applicability."""
+        pattern = (
+            r"\b(on or after|on or before|before|after|effective(?: from)?|starting|from)"
+            r"[:\s]+(\d{4}-\d{2}-\d{2}|[A-Za-z]+ \d{1,2}, \d{4})\b"
+        )
+        boundaries = []
+        for phrase, value in re.findall(pattern, self.text, flags=re.IGNORECASE):
+            try:
+                day = (date.fromisoformat(value) if value[0].isdigit()
+                       else datetime.strptime(value, "%B %d, %Y").date())
+            except ValueError:
+                continue
+            boundaries.append((phrase.lower(), day))
+        return boundaries
 
 
 def read_policy(folder: Path) -> dict[tuple, Clause]:
