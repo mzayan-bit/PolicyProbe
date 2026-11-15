@@ -47,3 +47,13 @@ for change in compare_policies(root / "before", root / "after"):
 ```
 
 The example reports an added exception and an edited return window. Sections are matched by document path, Markdown heading path, and occurrence. Renames appear as removal and addition. Explicit timing phrases retain their dates. The wording label covers simple prose wrapping and a narrow return-policy paraphrase. Other edits remain available for review.
+
+## Find exceptions in other documents
+
+The gift-order example changes the standard return window to 14 days. A separate gift-receipt policy keeps its 30-day window. Compare the context retrieved for the edit with every section in the new snapshot:
+
+```sh
+python -m policyprobe.compare_context examples/gift-orders/before examples/gift-orders/after --limit 2
+```
+
+The first citation identifies the edit. The second points to the unchanged gift exception. Full context also includes an unrelated delivery rule. Both outputs count body characters and preserve document and line references. The search ranks shared words; an exception with entirely different vocabulary can be missed. Conflict flags cover matching headings and wording with a single differing day count. Reviewing the cited clauses establishes whether their scopes actually overlap.
