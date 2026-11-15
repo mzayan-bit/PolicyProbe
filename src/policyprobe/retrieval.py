@@ -56,3 +56,20 @@ def related_context(clauses: list[Evidence], edited: Clause, limit: int = 3) -> 
     others = [item for item in clauses if item != anchor]
     query = " ".join((*edited.headings, edited.text))
     return [anchor, *search(others, query, limit - 1)]
+
+
+def window_conflicts(context: list[Evidence]) -> list[tuple[Evidence, Evidence]]:
+    """Flag identical statements with different day counts for human review."""
+    from itertools import combinations
+    import re
+
+    candidates = []
+    for item in context:
+        text = " ".join(item.clause.text.casefold().split())
+        pattern = r"\b(\d+)[ -](?:calendar )?days?\b"
+        values = re.findall(pattern, text)
+        if len(values) == 1:
+            candidates.append((re.sub(pattern, "{days}", text), int(values[0]), item))
+    return [(a, b) for (shape, days, a), (other, count, b) in combinations(candidates, 2)
+            if shape == other and days != count and a.version == b.version
+            and a.clause.headings == b.clause.headings]
