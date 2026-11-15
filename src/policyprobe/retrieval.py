@@ -44,3 +44,15 @@ def search(clauses: list[Evidence], query: str, limit: int = 3) -> list[Evidence
             ranked.append((score, item))
     ranked.sort(key=lambda pair: (-pair[0], pair[1].citation))
     return [item for _, item in ranked[:limit]]
+
+
+def related_context(clauses: list[Evidence], edited: Clause, limit: int = 3) -> list[Evidence]:
+    """Keep the supplied edit and search the same snapshot for supporting clauses."""
+    if limit < 1:
+        raise ValueError("allow at least one clause for the edit")
+    anchor = next((item for item in clauses if item.clause == edited), None)
+    if anchor is None:
+        raise ValueError("edited clause is missing from this snapshot")
+    others = [item for item in clauses if item != anchor]
+    query = " ".join((*edited.headings, edited.text))
+    return [anchor, *search(others, query, limit - 1)]
