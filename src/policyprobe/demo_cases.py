@@ -4,11 +4,11 @@ from dataclasses import dataclass
 from datetime import date
 
 
+from .orders import ShopperOrder
+
+
 @dataclass(frozen=True)
-class ReturnCase:
-    order_id: str
-    purchased_on: date
-    requested_on: date
+class ReturnCase(ShopperOrder):
     expected_refund: bool
     clause: str
 
