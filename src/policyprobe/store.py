@@ -5,6 +5,8 @@ from contextlib import closing, contextmanager
 from datetime import date
 from collections.abc import Iterator
 
+from .orders import ShopperOrder
+
 
 @contextmanager
 def order_store() -> Iterator[sqlite3.Connection]:
@@ -39,3 +41,11 @@ def record_refund(db: sqlite3.Connection, order_id: str) -> None:
     result = db.execute("UPDATE orders SET refunded = 1 WHERE id = ?", (order_id,))
     if result.rowcount == 0:
         raise KeyError(order_id)
+
+
+@contextmanager
+def shopper_store(order: ShopperOrder) -> Iterator[sqlite3.Connection]:
+    """Seed one fresh order and discard this session when the shopper leaves."""
+    with order_store() as db:
+        add_order(db, order.order_id, order.purchased_on)
+        yield db
