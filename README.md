@@ -57,3 +57,11 @@ python -m policyprobe.compare_context examples/gift-orders/before examples/gift-
 ```
 
 The first citation identifies the edit. The second points to the unchanged gift exception. Full context also includes an unrelated delivery rule. Both outputs count body characters and preserve document and line references. The search ranks shared words; an exception with entirely different vocabulary can be missed. Conflict flags cover matching headings and wording with a single differing day count. Reviewing the cited clauses establishes whether their scopes actually overlap.
+
+## Generate shoppers around a policy change
+
+```sh
+python -m policyprobe.shopper_preview --cutoff 2026-11-01 --requested-on 2026-11-20
+```
+
+This prints three order records purchased on October 31, November 1, and November 2. Each shopper requests a return on November 20. Supply a request date on or after the last purchase. The simulated dates and order IDs stay the same on replay, and the inputs carry no answer key. Use `shopper_store(order)` to run each generated shopper in a fresh SQLite session.
