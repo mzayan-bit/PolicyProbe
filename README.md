@@ -65,3 +65,16 @@ python -m policyprobe.shopper_preview --cutoff 2026-11-01 --requested-on 2026-11
 ```
 
 This prints three order records purchased on October 31, November 1, and November 2. Each shopper requests a return on November 20. Supply a request date on or after the last purchase. The simulated dates and order IDs stay the same on replay, and the inputs carry no answer key. Use `shopper_store(order)` to run each generated shopper in a fresh SQLite session.
+
+## Run against a local staging bot
+
+Run `python -m policyprobe.demo --target-url http://127.0.0.1:9000 --json` with a staging server implementing this contract. Each shopper gets a fresh client-generated session ID. The client sends two messages, first requesting a return and then supplying its order ID.
+
+| Method and path | Server behavior |
+| --- | --- |
+| PUT /sessions/{id} | Create an isolated test order from order_id, purchased_on, and requested_on. Return an empty JSON object. |
+| POST /sessions/{id}/messages | Accept a JSON message string field, advance the conversation, and return a reply string field. |
+| GET /sessions/{id}/order | Read the underlying order and return a boolean refunded field. |
+| DELETE /sessions/{id} | Discard the session. Accept repeated cleanup and unknown IDs. |
+
+The client uses a five-second network timeout per operation. An incomplete conversation includes the recorded turns and an error in the JSON report and exits with status 2. The runner attempts cleanup even if a request fails. Staging servers should expire abandoned sessions if cleanup cannot reach them.
