@@ -78,3 +78,9 @@ Run `python -m policyprobe.demo --target-url http://127.0.0.1:9000 --json` with 
 | DELETE /sessions/{id} | Discard the session. Accept repeated cleanup and unknown IDs. |
 
 The client uses a five-second network timeout per operation. An incomplete conversation includes the recorded turns and an error in the JSON report and exits with status 2. The runner attempts cleanup even if a request fails. Staging servers should expire abandoned sessions if cleanup cannot reach them.
+
+## Read a verdict
+
+Each demo report includes a status and a reason. The expected decision and clause are captured before the conversation. An eligible order left unrefunded produces `missing_refund`, including when the bot claims it issued a refund. An ineligible refunded order produces `wrong_approval`. Missing observations, operation failures, or an already refunded starting order produce `incomplete`. An unresolved expectation or missing policy reference produces `ambiguous`.
+
+The evaluator checks the final ledger. A missing refund alone does not establish whether the bot explicitly denied the request. Read the saved transcript to investigate the cause. Callers can supply an unresolved expectation when policy review is needed; automatic interpretation of arbitrary policy ambiguity remains a later capability.
