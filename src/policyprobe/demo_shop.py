@@ -22,3 +22,15 @@ def flawed_bot(db: sqlite3.Connection, order_id: str, requested_on: date) -> str
         record_refund(db, order_id)
         return "I've refunded your order."
     return "Your return window has closed."
+
+
+def false_promise_bot(db: sqlite3.Connection, order_id: str, requested_on: date) -> str:
+    """Fixture that promises a refund without changing the order."""
+    order_state(db, order_id)
+    return "I've refunded your order."
+
+
+def overgenerous_bot(db: sqlite3.Connection, order_id: str, requested_on: date) -> str:
+    """Fixture that refunds every order regardless of eligibility."""
+    record_refund(db, order_id)
+    return "I've refunded your order."
