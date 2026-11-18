@@ -5,6 +5,7 @@ from .demo_shop import correct_bot, flawed_bot
 from .conversation import converse
 from .bundled import BundledTarget
 from .http_target import HttpTarget
+from .verdict import Expectation, evaluate
 
 
 def run_demo(targets=None) -> list[dict]:
@@ -13,7 +14,9 @@ def run_demo(targets=None) -> list[dict]:
     records = []
     for name, target in targets:
         for case in CASES:
+            expected = Expectation(case.expected_refund, case.clause)
             result = converse(target, case, ["I'd like to return my order.", case.order_id])
+            verdict = evaluate(result, expected)
             records.append({
                 "bot": name,
                 "order": case.order_id,
@@ -26,7 +29,9 @@ def run_demo(targets=None) -> list[dict]:
                 "reply": next((text for role, text in reversed(result.turns) if role == "bot"), None),
                 "turns": [list(turn) for turn in result.turns],
                 "error": result.error,
-                "passed": None if result.error else result.refunded_after == case.expected_refund,
+                "passed": verdict.passed,
+                "status": verdict.status,
+                "reason": verdict.reason,
             })
     return records
 
@@ -43,14 +48,12 @@ def main() -> None:
     if args.json:
         print(json.dumps(records, indent=2))
     for row in ([] if args.json else records):
-        verdict = "pass" if row["passed"] else "fail"
-        if row["error"]:
-            verdict = "incomplete"
+        verdict = row["status"]
         print(f"{verdict:4}  {row['bot']:7}  {row['order']}  "
               f"refund expected={row['expected_refund']} recorded={row['refunded_after']}  "
               f"({row['clause']})")
 
-    if any(row["error"] for row in records):
+    if any(row["status"] in ("incomplete", "ambiguous") for row in records):
         raise SystemExit(2)
 
 
