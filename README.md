@@ -84,3 +84,9 @@ The client uses a five-second network timeout per operation. An incomplete conve
 Each demo report includes a status and a reason. The expected decision and clause are captured before the conversation. An eligible order left unrefunded produces `missing_refund`, including when the bot claims it issued a refund. An ineligible refunded order produces `wrong_approval`. Missing observations, operation failures, or an already refunded starting order produce `incomplete`. An unresolved expectation or missing policy reference produces `ambiguous`.
 
 The evaluator checks the final ledger. A missing refund alone does not establish whether the bot explicitly denied the request. Read the saved transcript to investigate the cause. Callers can supply an unresolved expectation when policy review is needed; automatic interpretation of arbitrary policy ambiguity remains a later capability.
+
+## Watch an investigation choose its next test
+
+Run `python -m policyprobe.investigate_demo --budget 5` after installation. The deterministic return-window baseline tries the older purchase, observes a missing refund, repeats it in a fresh session, and then requests a return ten days after the same purchase. It records the reason, expectation, transcript, ledger observations, and verdict for every attempt. Repeats consume the conversation budget.
+
+The ten-day probe is a programmed experimental choice. This baseline establishes a runnable adaptive loop; language-model test selection and measured comparisons are upcoming milestones. A request-date probe may fall before a policy's effective date, so its result alone cannot establish that the policy cutoff caused the original failure. The caller supplies each expectation before the corresponding conversation.
