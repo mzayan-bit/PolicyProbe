@@ -11,6 +11,11 @@ class ReturnSelector:
         self.candidates = tuple(candidates)
 
     def choose(self, history):
+        if history:
+            last = history[-1]
+            if last.action == "explore" and last.verdict.passed is False:
+                return Choice("repeat", f"Repeat the observed {last.verdict.status} in a fresh session.",
+                              last.order)
         explored = {attempt.order for attempt in history if attempt.action == "explore"}
         for order in self.candidates:
             if order not in explored:
