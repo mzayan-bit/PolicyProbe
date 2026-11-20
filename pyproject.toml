@@ -17,3 +17,6 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[project.scripts]
+policyprobe = "policyprobe.cli:main"
