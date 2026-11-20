@@ -90,3 +90,16 @@ The evaluator checks the final ledger. A missing refund alone does not establish
 Run `python -m policyprobe.investigate_demo --budget 5` after installation. The deterministic return-window baseline tries the older purchase, observes a missing refund, repeats it in a fresh session, and then requests a return ten days after the same purchase. It records the reason, expectation, transcript, ledger observations, and verdict for every attempt. Repeats consume the conversation budget.
 
 The ten-day probe is a programmed experimental choice. This baseline establishes a runnable adaptive loop; language-model test selection and measured comparisons are upcoming milestones. A request-date probe may fall before a policy's effective date, so its result alone cannot establish that the policy cutoff caused the original failure. The caller supplies each expectation before the corresponding conversation.
+
+## Check and replay from the CLI
+
+Reinstall the package after updating to get the console command.
+
+```sh
+policyprobe check --target flawed --budget 5 --output run.json
+policyprobe replay run.json --case-id CASE_ID
+```
+
+Replace CASE_ID with a case identifier printed by the check. The check saves JSON and prints a Markdown report; redirect stdout to save that report. Existing output files are protected from overwriting. Replay uses the saved dates, expectation, and bundled target in a fresh session. Matching inputs share an ID even when the investigation repeats them. Replay selects the first occurrence.
+
+This first CLI supports the bundled November 2026 return scenario and the correct or flawed scripted shop. Arbitrary policy interpretation and staging replay require further integration. Check returns success when its report was generated, including reports containing findings; inspect verdicts to assess the target. The separate staging demo exits with status 2 for incomplete runs.
