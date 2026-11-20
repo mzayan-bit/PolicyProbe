@@ -9,7 +9,7 @@ from .demo_shop import correct_bot, flawed_bot
 from .investigate_demo import expectation_for
 from .investigation import investigate
 from .orders import boundary_orders
-from .reports import report
+from .reports import report, markdown
 from .selection import ReturnSelector
 from datetime import date
 
@@ -34,6 +34,8 @@ def main():
     with args.output.open("x", encoding="utf-8") as file:
         json.dump(payload, file, indent=2)
         file.write("\n")
+
+    print(markdown(payload))
 
 
 if __name__ == "__main__":
