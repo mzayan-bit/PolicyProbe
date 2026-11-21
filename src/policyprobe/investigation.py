@@ -38,7 +38,7 @@ class Investigation:
 
 def investigate(target: Target, selector: Selector,
                 expectation_for: Callable[[ShopperOrder], Expectation],
-                budget: int = 20) -> Investigation:
+                budget: int = 20, messages_for=None) -> Investigation:
     if type(budget) is not int or budget < 0:
         raise ValueError("budget must be a nonnegative integer")
     attempts = []
@@ -51,8 +51,9 @@ def investigate(target: Target, selector: Selector,
         if not choice.reason.strip():
             raise ValueError("a choice needs a reason")
         expected = expectation_for(choice.order)
-        result = converse(target, choice.order,
-                          ["I'd like to return my order.", choice.order.order_id])
+        messages = (messages_for(choice.order) if messages_for is not None
+                    else ["I'd like to return my order.", choice.order.order_id])
+        result = converse(target, choice.order, messages)
         attempts.append(Attempt(choice.action, choice.reason, choice.order, expected,
                                 result, evaluate(result, expected)))
     return Investigation(tuple(attempts), "Conversation budget exhausted.")

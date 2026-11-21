@@ -34,3 +34,18 @@ class ModelSelector:
         order = self.candidates[index]
         repeated = any(a.order == order for a in history)
         return Choice("repeat" if repeated else "explore", reason, order)
+
+
+class ModelShopper:
+    def __init__(self, client):
+        self.client = client
+
+    def __call__(self, order):
+        answer = self.client.complete(
+            'Write a short request to return an order. Return JSON with "message", a nonempty string. '
+            'The order number will be supplied separately in the next turn.'
+        )
+        message = answer["message"]
+        if not isinstance(message, str) or not message.strip():
+            raise ValueError("model must supply a shopper message")
+        return [message, order.order_id]
