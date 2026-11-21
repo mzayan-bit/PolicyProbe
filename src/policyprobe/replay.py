@@ -27,8 +27,10 @@ def replay(payload, identifier):
         raise ValueError("invalid saved expectation")
     if case_id(order, expected) != identifier:
         raise ValueError("saved inputs do not match the case id")
-    result = converse(BundledTarget(bot), order,
-                      ["I'd like to return my order.", order.order_id])
+    messages = [text for role, text in row["conversation"]["turns"] if role == "shopper"]
+    if not messages or any(not isinstance(text, str) for text in messages):
+        raise ValueError("saved shopper messages are missing")
+    result = converse(BundledTarget(bot), order, messages)
     attempt = Attempt("repeat", "Replay saved inputs in a fresh session.", order,
                       expected, result, evaluate(result, expected))
     return report(Investigation((attempt,), "Replay complete."), payload["target"])
