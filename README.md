@@ -103,3 +103,17 @@ policyprobe replay run.json --case-id CASE_ID
 Replace CASE_ID with a case identifier printed by the check. The check saves JSON and prints a Markdown report; redirect stdout to save that report. Existing output files are protected from overwriting. Replay uses the saved dates, expectation, and bundled target in a fresh session. Matching inputs share an ID even when the investigation repeats them. Replay selects the first occurrence.
 
 This first CLI supports the bundled November 2026 return scenario and the correct or flawed scripted shop. Arbitrary policy interpretation and staging replay require further integration. Check returns success when its report was generated, including reports containing findings; inspect verdicts to assess the target. The separate staging demo exits with status 2 for incomplete runs.
+
+## Try a locally served model
+
+With an installed model served through Ollama on your machine:
+
+```sh
+policyprobe check --model YOUR_LOCAL_MODEL --budget 5 --output model-run.json
+```
+
+The optional client uses Ollama's JSON chat endpoint at http://127.0.0.1:11434. Set --model-endpoint to another literal loopback address and port if needed. Every response must complete within the network timeout and provide the required JSON fields. Invalid output ends the command with an error.
+
+The model selects among three dated candidates, can repeat a candidate or stop, and writes the opening shopper request. The runner supplies the order ID on the second turn. Reports record selection mode, requested model name, and call count. Replay uses the saved shopper messages. Candidate selection receives observed outcomes and transcripts; expectations remain in the scorer.
+
+CI uses mocked model responses. Model-backed performance measurements require an actual installed local model and remain pending until such a run is recorded. The baseline can change request dates; this initial model selector uses a fixed pool, so comparisons must control candidate availability.
