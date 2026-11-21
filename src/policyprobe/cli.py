@@ -12,6 +12,8 @@ from .orders import boundary_orders
 from .reports import report, markdown
 from .selection import ReturnSelector
 from .replay import replay
+from .local_model import LocalModel
+from .model_selector import ModelSelector, ModelShopper
 from datetime import date
 
 
@@ -25,6 +27,8 @@ def main():
     check.add_argument("--target", choices=TARGETS, default="flawed")
     check.add_argument("--budget", type=int, default=5)
     check.add_argument("--output", type=Path, required=True)
+    check.add_argument("--model", help="installed local Ollama model")
+    check.add_argument("--model-endpoint", default="http://127.0.0.1:11434")
     saved = commands.add_parser("replay", help="repeat one case from a saved report")
     saved.add_argument("report", type=Path)
     saved.add_argument("--case-id", required=True)
@@ -39,9 +43,26 @@ def main():
     if args.budget < 0:
         parser.error("--budget must be nonnegative")
     orders = boundary_orders(date(2026, 11, 1), date(2026, 11, 20))
-    result = investigate(BundledTarget(TARGETS[args.target]), ReturnSelector(orders),
-                         expectation_for, args.budget)
+    if args.output.exists():
+        parser.error("output already exists")
+    client = None
+    selector = ReturnSelector(orders)
+    shopper = None
+    try:
+        if args.model:
+            client = LocalModel(args.model, args.model_endpoint)
+            selector = ModelSelector(client, orders)
+            shopper = ModelShopper(client)
+        result = investigate(BundledTarget(TARGETS[args.target]), selector,
+                             expectation_for, args.budget, messages_for=shopper)
+    except (ValueError, KeyError, TypeError, OSError) as exc:
+        parser.error(str(exc))
     payload = report(result, args.target)
+    payload["selection"] = {
+        "mode": "local_model" if client else "deterministic",
+        "model": client.model if client else None,
+        "calls": client.calls if client else 0,
+    }
     with args.output.open("x", encoding="utf-8") as file:
         json.dump(payload, file, indent=2)
         file.write("\n")
