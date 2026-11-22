@@ -1,0 +1,202 @@
+{
+  "cutoff-a-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-a-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-a-2": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-a-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-b-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-b-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-b-2": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "cutoff-b-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "cutoff"
+  },
+  "grandfather-a-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-a-1": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-a-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-a-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-b-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-b-1": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-b-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "grandfather-b-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "grandfather"
+  },
+  "exception-a-0": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-a-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-a-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-a-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-b-0": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-b-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-b-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exception-b-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exception"
+  },
+  "exchange-a-0": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-a-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-a-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-a-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-b-0": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-b-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-b-2": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "exchange-b-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "exchange"
+  },
+  "wording-a-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-a-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-a-2": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-a-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-b-0": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-b-1": {
+    "allowed": true,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-b-2": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "wording"
+  },
+  "wording-b-3": {
+    "allowed": false,
+    "clause": "policy/after",
+    "family": "wording"
+  }
+}
