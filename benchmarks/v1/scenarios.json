@@ -1,0 +1,372 @@
+[
+  {
+    "id": "cutoff-a",
+    "split": "development",
+    "family": "cutoff",
+    "before": "Standard orders can be returned within 30 days.",
+    "after": "Standard orders can be returned within 14 days. Purchase day is day zero; day 14 is included.",
+    "cases": [
+      {
+        "id": "cutoff-a-0",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-15",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-a-1",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-a-2",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-17",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-a-3",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-02",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "cutoff-b",
+    "split": "evaluation",
+    "family": "cutoff",
+    "before": "Standard orders can be returned within 25 days.",
+    "after": "Standard orders can be returned within 10 days. Purchase day is day zero; day 10 is included.",
+    "cases": [
+      {
+        "id": "cutoff-b-0",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-14",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-b-1",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-15",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-b-2",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "cutoff-b-3",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-30",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "grandfather-a",
+    "split": "development",
+    "family": "grandfather",
+    "before": "All orders have a 30-day return window.",
+    "after": "Orders purchased before November 1, 2026 retain 30 days. Later purchases have 14 days. Last days are included.",
+    "cases": [
+      {
+        "id": "grandfather-a-0",
+        "purchased_on": "2026-10-31",
+        "requested_on": "2026-11-20",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-a-1",
+        "purchased_on": "2026-11-01",
+        "requested_on": "2026-11-20",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-a-2",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-a-3",
+        "purchased_on": "2026-11-03",
+        "requested_on": "2026-11-18",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "grandfather-b",
+    "split": "evaluation",
+    "family": "grandfather",
+    "before": "All orders have a 25-day return window.",
+    "after": "Orders purchased before November 1, 2025 retain 25 days. Later purchases have 10 days. Last days are included.",
+    "cases": [
+      {
+        "id": "grandfather-b-0",
+        "purchased_on": "2025-10-31",
+        "requested_on": "2025-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-b-1",
+        "purchased_on": "2025-11-01",
+        "requested_on": "2025-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-b-2",
+        "purchased_on": "2025-11-02",
+        "requested_on": "2025-11-12",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "grandfather-b-3",
+        "purchased_on": "2025-11-03",
+        "requested_on": "2025-11-14",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "exception-a",
+    "split": "development",
+    "family": "exception",
+    "before": "All items have a 14-day return window.",
+    "after": "Standard items have 14 days. Gift items have 30 days. Last days are included.",
+    "cases": [
+      {
+        "id": "exception-a-0",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-22",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "exception-a-1",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-22",
+        "item_category": "gift",
+        "action": "return"
+      },
+      {
+        "id": "exception-a-2",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-02",
+        "item_category": "gift",
+        "action": "return"
+      },
+      {
+        "id": "exception-a-3",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-03",
+        "item_category": "gift",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "exception-b",
+    "split": "evaluation",
+    "family": "exception",
+    "before": "All items have a 10-day return window.",
+    "after": "Standard items have 10 days. Gift items have 25 days. Last days are included.",
+    "cases": [
+      {
+        "id": "exception-b-0",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-21",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "exception-b-1",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-21",
+        "item_category": "gift",
+        "action": "return"
+      },
+      {
+        "id": "exception-b-2",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-30",
+        "item_category": "gift",
+        "action": "return"
+      },
+      {
+        "id": "exception-b-3",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-12-01",
+        "item_category": "gift",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "exchange-a",
+    "split": "development",
+    "family": "exchange",
+    "before": "Returns and exchanges both have a 14-day window.",
+    "after": "Returns have 14 days; exchanges have 30 days. Last days are included.",
+    "cases": [
+      {
+        "id": "exchange-a-0",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-22",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "exchange-a-1",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-22",
+        "item_category": "standard",
+        "action": "exchange"
+      },
+      {
+        "id": "exchange-a-2",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-02",
+        "item_category": "standard",
+        "action": "exchange"
+      },
+      {
+        "id": "exchange-a-3",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-03",
+        "item_category": "standard",
+        "action": "exchange"
+      }
+    ]
+  },
+  {
+    "id": "exchange-b",
+    "split": "evaluation",
+    "family": "exchange",
+    "before": "Returns and exchanges both have a 10-day window.",
+    "after": "Returns have 10 days; exchanges have 25 days. Last days are included.",
+    "cases": [
+      {
+        "id": "exchange-b-0",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-21",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "exchange-b-1",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-21",
+        "item_category": "standard",
+        "action": "exchange"
+      },
+      {
+        "id": "exchange-b-2",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-30",
+        "item_category": "standard",
+        "action": "exchange"
+      },
+      {
+        "id": "exchange-b-3",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-12-01",
+        "item_category": "standard",
+        "action": "exchange"
+      }
+    ]
+  },
+  {
+    "id": "wording-a",
+    "split": "development",
+    "family": "wording",
+    "before": "Items may be returned within 14 days of purchase, including day 14.",
+    "after": "Items can be returned within 14 days of purchase, including day 14.",
+    "cases": [
+      {
+        "id": "wording-a-0",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-02",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-a-1",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-a-2",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-11-17",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-a-3",
+        "purchased_on": "2026-11-02",
+        "requested_on": "2026-12-02",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  },
+  {
+    "id": "wording-b",
+    "split": "evaluation",
+    "family": "wording",
+    "before": "Items may be returned within 10 days of purchase, including day 10.",
+    "after": "Items can be returned within 10 days of purchase, including day 10.",
+    "cases": [
+      {
+        "id": "wording-b-0",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-05",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-b-1",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-15",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-b-2",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-16",
+        "item_category": "standard",
+        "action": "return"
+      },
+      {
+        "id": "wording-b-3",
+        "purchased_on": "2026-11-05",
+        "requested_on": "2026-11-30",
+        "item_category": "standard",
+        "action": "return"
+      }
+    ]
+  }
+]
