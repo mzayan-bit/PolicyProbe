@@ -38,3 +38,36 @@ class BoundaryPlan:
         if len(observations) >= len(self.ids):
             return None
         return self.ids[len(observations)]
+
+
+def checked_ids(answer, candidates):
+    values = answer["case_ids"]
+    if not isinstance(values, list) or any(
+        not isinstance(value, str) or value not in candidates for value in values
+    ):
+        raise ValueError("model must select case ids from the supplied pool")
+    return values
+
+
+class ModelPlan:
+    def __init__(self, scenario, client, method, budget):
+        self.scenario = deepcopy(scenario)
+        self.client = client
+        self.method = method
+        self.budget = budget
+        self.ids = None
+
+    def choose(self, observations):
+        if self.ids is None:
+            answer = self.client.complete(
+                'Plan the test cases before execution. Return JSON {"case_ids": [ids]}. '
+                f"Select at most {self.budget} cases; repeats count toward the limit.\n"
+                + json.dumps({"policy": context_for(self.scenario, self.method),
+                              "candidates": self.scenario["cases"]})
+            )
+            self.ids = checked_ids(answer, {case["id"] for case in self.scenario["cases"]})
+            if len(self.ids) > self.budget:
+                raise ValueError("model plan exceeds the conversation budget")
+        if len(observations) >= len(self.ids):
+            return None
+        return self.ids[len(observations)]
