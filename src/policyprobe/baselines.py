@@ -81,7 +81,7 @@ def make_selector(method, scenario, client, budget):
     if client is None:
         raise ValueError("this method requires a model client")
     if method == "adaptive":
-        return AdaptivePlan(scenario, client, budget)
+        return AdaptivePlan(scenario, client, method, budget)
     return ModelPlan(scenario, client, method, budget)
 
 
