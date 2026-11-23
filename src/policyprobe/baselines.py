@@ -71,3 +71,15 @@ class ModelPlan:
         if len(observations) >= len(self.ids):
             return None
         return self.ids[len(observations)]
+
+
+def make_selector(method, scenario, client, budget):
+    if method not in METHODS:
+        raise ValueError("unknown benchmark method")
+    if method == "boundary":
+        return BoundaryPlan(scenario)
+    if client is None:
+        raise ValueError("this method requires a model client")
+    if method == "adaptive":
+        return AdaptivePlan(scenario, client, budget)
+    return ModelPlan(scenario, client, method, budget)
