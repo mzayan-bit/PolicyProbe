@@ -83,3 +83,19 @@ def make_selector(method, scenario, client, budget):
     if method == "adaptive":
         return AdaptivePlan(scenario, client, budget)
     return ModelPlan(scenario, client, method, budget)
+
+
+class AdaptivePlan(ModelPlan):
+    def choose(self, observations):
+        answer = self.client.complete(
+            'Choose the next test from the candidate pool using observed outcomes. '
+            'Return JSON {"case_ids": [one_id]} or {"case_ids": []} to stop.\n'
+            + json.dumps({"policy": context_for(self.scenario, "retrieval"),
+                          "candidates": self.scenario["cases"],
+                          "observations": observations,
+                          "remaining": self.budget - len(observations)})
+        )
+        ids = checked_ids(answer, {case["id"] for case in self.scenario["cases"]})
+        if len(ids) > 1:
+            raise ValueError("adaptive selection must choose one case at a time")
+        return ids[0] if ids else None
