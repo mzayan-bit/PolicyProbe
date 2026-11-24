@@ -1,6 +1,7 @@
 """Scripted pilot targets with an action ledger and a seeded window defect."""
 
 from datetime import date
+from contextlib import closing
 import sqlite3
 
 
@@ -26,13 +27,10 @@ class BenchmarkShop:
         if self.broken:
             window = self.short - 1
         allowed = 0 <= age <= window
-        with sqlite3.connect(":memory:") as db:
-            try:
-                db.execute("CREATE TABLE actions (case_id TEXT, action TEXT)")
-                if allowed:
-                    db.execute("INSERT INTO actions VALUES (?, ?)", (case["id"], case["action"]))
-                rows = db.execute("SELECT case_id, action FROM actions").fetchall()
-                self.records.append({"case_id": case["id"], "actions": rows})
-                return bool(rows)
-            finally:
-                db.close()
+        with closing(sqlite3.connect(":memory:")) as db:
+            db.execute("CREATE TABLE actions (case_id TEXT, action TEXT)")
+            if allowed:
+                db.execute("INSERT INTO actions VALUES (?, ?)", (case["id"], case["action"]))
+            rows = db.execute("SELECT case_id, action FROM actions").fetchall()
+            self.records.append({"case_id": case["id"], "actions": rows})
+            return bool(rows)
