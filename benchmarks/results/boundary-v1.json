@@ -1,0 +1,749 @@
+{
+  "dataset": "v1",
+  "split": "evaluation",
+  "runs": [
+    {
+      "dataset": "v1",
+      "scenario": "cutoff-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "cutoff-b-0",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "cutoff-b-1",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "cutoff-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "cutoff-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.000442000000475673,
+      "target": "clean",
+      "seeded_defect": null,
+      "ledger": [
+        {
+          "case_id": "cutoff-b-0",
+          "actions": [
+            [
+              "cutoff-b-0",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "cutoff-b-1",
+          "actions": [
+            [
+              "cutoff-b-1",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "cutoff-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "cutoff-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "cutoff-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "cutoff-b-0",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "cutoff-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "cutoff-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "cutoff-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.0002464159988448955,
+      "target": "seeded",
+      "seeded_defect": "cutoff-b/short-window",
+      "ledger": [
+        {
+          "case_id": "cutoff-b-0",
+          "actions": [
+            [
+              "cutoff-b-0",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "cutoff-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "cutoff-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "cutoff-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "grandfather-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "grandfather-b-0",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "grandfather-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "grandfather-b-2",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "grandfather-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00023662500097998418,
+      "target": "clean",
+      "seeded_defect": null,
+      "ledger": [
+        {
+          "case_id": "grandfather-b-0",
+          "actions": [
+            [
+              "grandfather-b-0",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "grandfather-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "grandfather-b-2",
+          "actions": [
+            [
+              "grandfather-b-2",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "grandfather-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "grandfather-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "grandfather-b-0",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "grandfather-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "grandfather-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "grandfather-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00021874999947613105,
+      "target": "seeded",
+      "seeded_defect": "grandfather-b/short-window",
+      "ledger": [
+        {
+          "case_id": "grandfather-b-0",
+          "actions": []
+        },
+        {
+          "case_id": "grandfather-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "grandfather-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "grandfather-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "exception-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "exception-b-0",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exception-b-1",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exception-b-2",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exception-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00023979199977475218,
+      "target": "clean",
+      "seeded_defect": null,
+      "ledger": [
+        {
+          "case_id": "exception-b-0",
+          "actions": []
+        },
+        {
+          "case_id": "exception-b-1",
+          "actions": [
+            [
+              "exception-b-1",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "exception-b-2",
+          "actions": [
+            [
+              "exception-b-2",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "exception-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "exception-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "exception-b-0",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exception-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "exception-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "exception-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00021654100055457093,
+      "target": "seeded",
+      "seeded_defect": "exception-b/short-window",
+      "ledger": [
+        {
+          "case_id": "exception-b-0",
+          "actions": []
+        },
+        {
+          "case_id": "exception-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "exception-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "exception-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "exchange-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "exchange-b-0",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exchange-b-1",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exchange-b-2",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exchange-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00022187499780557118,
+      "target": "clean",
+      "seeded_defect": null,
+      "ledger": [
+        {
+          "case_id": "exchange-b-0",
+          "actions": []
+        },
+        {
+          "case_id": "exchange-b-1",
+          "actions": [
+            [
+              "exchange-b-1",
+              "exchange"
+            ]
+          ]
+        },
+        {
+          "case_id": "exchange-b-2",
+          "actions": [
+            [
+              "exchange-b-2",
+              "exchange"
+            ]
+          ]
+        },
+        {
+          "case_id": "exchange-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "exchange-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "exchange-b-0",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "exchange-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "exchange-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "exchange-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00021429099797387607,
+      "target": "seeded",
+      "seeded_defect": "exchange-b/short-window",
+      "ledger": [
+        {
+          "case_id": "exchange-b-0",
+          "actions": []
+        },
+        {
+          "case_id": "exchange-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "exchange-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "exchange-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "wording-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "wording-b-0",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "wording-b-1",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "wording-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "wording-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00021912500233156607,
+      "target": "clean",
+      "seeded_defect": null,
+      "ledger": [
+        {
+          "case_id": "wording-b-0",
+          "actions": [
+            [
+              "wording-b-0",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "wording-b-1",
+          "actions": [
+            [
+              "wording-b-1",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "wording-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "wording-b-3",
+          "actions": []
+        }
+      ]
+    },
+    {
+      "dataset": "v1",
+      "scenario": "wording-b",
+      "method": "boundary",
+      "budget": 20,
+      "attempts": [
+        {
+          "case_id": "wording-b-0",
+          "allowed": true,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "wording-b-1",
+          "allowed": false,
+          "error": null,
+          "passed": false
+        },
+        {
+          "case_id": "wording-b-2",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        },
+        {
+          "case_id": "wording-b-3",
+          "allowed": false,
+          "error": null,
+          "passed": true
+        }
+      ],
+      "stop_reason": "selector stopped",
+      "model": null,
+      "model_calls": 0,
+      "elapsed_seconds": 0.00021658400146407075,
+      "target": "seeded",
+      "seeded_defect": "wording-b/short-window",
+      "ledger": [
+        {
+          "case_id": "wording-b-0",
+          "actions": [
+            [
+              "wording-b-0",
+              "return"
+            ]
+          ]
+        },
+        {
+          "case_id": "wording-b-1",
+          "actions": []
+        },
+        {
+          "case_id": "wording-b-2",
+          "actions": []
+        },
+        {
+          "case_id": "wording-b-3",
+          "actions": []
+        }
+      ]
+    }
+  ],
+  "summary": [
+    {
+      "scenario": "cutoff-b",
+      "target": "clean",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 0,
+      "distinct_seeded_defects": 0,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": null,
+      "model_calls": 0
+    },
+    {
+      "scenario": "cutoff-b",
+      "target": "seeded",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 1,
+      "distinct_seeded_defects": 1,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": 2,
+      "model_calls": 0
+    },
+    {
+      "scenario": "grandfather-b",
+      "target": "clean",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 0,
+      "distinct_seeded_defects": 0,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": null,
+      "model_calls": 0
+    },
+    {
+      "scenario": "grandfather-b",
+      "target": "seeded",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 2,
+      "distinct_seeded_defects": 1,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": 1,
+      "model_calls": 0
+    },
+    {
+      "scenario": "exception-b",
+      "target": "clean",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 0,
+      "distinct_seeded_defects": 0,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": null,
+      "model_calls": 0
+    },
+    {
+      "scenario": "exception-b",
+      "target": "seeded",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 2,
+      "distinct_seeded_defects": 1,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": 2,
+      "model_calls": 0
+    },
+    {
+      "scenario": "exchange-b",
+      "target": "clean",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 0,
+      "distinct_seeded_defects": 0,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": null,
+      "model_calls": 0
+    },
+    {
+      "scenario": "exchange-b",
+      "target": "seeded",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 2,
+      "distinct_seeded_defects": 1,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": 2,
+      "model_calls": 0
+    },
+    {
+      "scenario": "wording-b",
+      "target": "clean",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 0,
+      "distinct_seeded_defects": 0,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": null,
+      "model_calls": 0
+    },
+    {
+      "scenario": "wording-b",
+      "target": "seeded",
+      "method": "boundary",
+      "attempts": 4,
+      "incomplete": 0,
+      "failing_cases": 1,
+      "distinct_seeded_defects": 1,
+      "clean_target_mismatches": 0,
+      "first_failing_attempt": 2,
+      "model_calls": 0
+    }
+  ],
+  "execution": "scripted pilot targets"
+}
