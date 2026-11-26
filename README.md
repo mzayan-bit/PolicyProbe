@@ -117,3 +117,9 @@ The optional client uses Ollama's JSON chat endpoint at http://127.0.0.1:11434. 
 The model selects among three dated candidates, can repeat a candidate or stop, and writes the opening shopper request. The runner supplies the order ID on the second turn. Reports record selection mode, requested model name, and call count. Replay uses the saved shopper messages. Candidate selection receives observed outcomes and transcripts; expectations remain in the scorer.
 
 CI uses mocked model responses. Model-backed performance measurements require an actual installed local model and remain pending until such a run is recorded. The baseline can change request dates; this initial model selector uses a fixed pool, so comparisons must control candidate availability.
+
+## Recover a failed run
+
+JSON reports are serialized to a temporary file and published only after the complete write. An existing destination is preserved, including when two processes select the same path. A failed publication can be retried with the same path if no report was published. An abrupt process kill can leave a temporary file in the output directory; the destination remains complete or absent.
+
+A retry starts fresh test sessions and reruns the investigation. Mid-investigation checkpoint resume is still pending. Saved findings can be replayed individually. If a staging request and session cleanup both fail, the report preserves both errors. Benchmark file hashes are checked before execution and again before scoring to reject changes during a run.
