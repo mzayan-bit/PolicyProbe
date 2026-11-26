@@ -1,5 +1,7 @@
 """Command line entry point for checking the bundled return-policy scenario."""
 
+from .output import write_report
+
 import argparse
 import json
 from pathlib import Path
@@ -63,9 +65,7 @@ def main():
         "model": client.model if client else None,
         "calls": client.calls if client else 0,
     }
-    with args.output.open("x", encoding="utf-8") as file:
-        json.dump(payload, file, indent=2)
-        file.write("\n")
+    write_report(args.output, payload)
 
     print(markdown(payload))
 

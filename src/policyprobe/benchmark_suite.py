@@ -1,5 +1,7 @@
 """Execute the frozen pilot and export observed outcomes."""
 
+from .output import write_report
+
 import argparse
 import json
 from pathlib import Path
@@ -40,9 +42,7 @@ def main():
         parser.error("this method requires --model")
     client = LocalModel(args.model) if args.model else None
     result = suite(args.dataset, args.split, args.method, client)
-    with args.output.open("x") as file:
-        json.dump(result, file, indent=2)
-        file.write("\n")
+    write_report(args.output, result)
     print(json.dumps(result["summary"], indent=2))
 
 
