@@ -42,7 +42,15 @@ class HttpTarget:
                 "requested_on": order.requested_on.isoformat(),
             })
             yield _HttpSession(self, path)
-        finally:
+        except BaseException as original:
+            try:
+                self.request("DELETE", path)
+            except TargetError as cleanup:
+                if isinstance(original, TargetError):
+                    raise TargetError(f"{original}; cleanup also failed: {cleanup}") from original
+                original.add_note(f"Session cleanup failed: {cleanup}")
+            raise
+        else:
             self.request("DELETE", path)
 
 
