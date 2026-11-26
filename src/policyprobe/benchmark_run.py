@@ -31,6 +31,8 @@ def run_scenario(folder: Path, scenario, method, execute, client=None, budget=20
         except (OSError, ValueError) as exc:
             observation = {"case_id": identifier, "allowed": None, "error": str(exc)}
         observations.append(observation)
+    # Reject dataset edits that occurred while the target was running.
+    verify_dataset(folder)
     # The answer key is loaded only once all test choices have been made.
     scored = []
     for observation in observations:
