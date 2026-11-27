@@ -37,3 +37,24 @@ def markdown(payload):
     if not payload["changes"]:
         lines.append("No changed clauses found.")
     return "\n".join(lines) + "\n"
+
+
+def main():
+    import argparse
+    from .output import write_report
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("before", type=Path)
+    parser.add_argument("after", type=Path)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        payload = changes_report(args.before, args.after)
+        write_report(args.output, payload)
+    except (OSError, ValueError) as exc:
+        parser.error(str(exc))
+    print(markdown(payload))
+
+
+if __name__ == "__main__":
+    main()
