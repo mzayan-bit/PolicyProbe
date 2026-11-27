@@ -31,3 +31,11 @@ jobs:
         run: |
           policyprobe check --target flawed --output smoke.json > smoke.md
           cat smoke.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: policy-review
+          path: |
+            policy-change.json
+            policy-change.md
+            smoke.json
+            smoke.md
