@@ -123,3 +123,11 @@ CI uses mocked model responses. Model-backed performance measurements require an
 JSON reports are serialized to a temporary file and published only after the complete write. An existing destination is preserved, including when two processes select the same path. A failed publication can be retried with the same path if no report was published. An abrupt process kill can leave a temporary file in the output directory; the destination remains complete or absent.
 
 A retry starts fresh test sessions and reruns the investigation. Mid-investigation checkpoint resume is still pending. Saved findings can be replayed individually. If a staging request and session cleanup both fail, the report preserves both errors. Benchmark file hashes are checked before execution and again before scoring to reject changes during a run.
+
+## Review policies in a pull request
+
+The Policy review workflow compares examples/returns/after against the pull request base. It writes edited clauses and retrieved evidence to the Actions summary and uploads JSON and Markdown artifacts. A manual run compares the current snapshot with itself to check the workflow wiring.
+
+The workflow also runs the bundled flawed-shop smoke test and saves a replayable report. That smoke test uses the fixed demo rules. Editing arbitrary Markdown does not change the scripted bot or its scorer. The document comparison and the regression smoke result are separate evidence; automatic execution of newly interpreted policy rules remains pending.
+
+To reproduce the document comparison locally, run python -m policyprobe.change_report BEFORE_FOLDER AFTER_FOLDER --output policy-change.json. Existing report paths are preserved.
