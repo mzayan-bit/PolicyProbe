@@ -20,3 +20,20 @@ def changes_report(before: Path, after: Path):
                          for item in evidence],
         })
     return {"changes": changes, "evaluation": "policy comparison only"}
+
+
+def markdown(payload):
+    import html
+
+    lines = ["# Policy change review", "",
+             "The report identifies edits and related clauses for review.", ""]
+    for change in payload["changes"]:
+        clause = change["after"] or change["before"]
+        title = " / ".join(clause["headings"]) or clause["document"]
+        lines.extend([f"## {html.escape(title)}", "", f"Change: {change['kind']}", ""])
+        for item in change["evidence"]:
+            lines.extend([html.escape(item["citation"]), "",
+                          html.escape(item["text"]), ""])
+    if not payload["changes"]:
+        lines.append("No changed clauses found.")
+    return "\n".join(lines) + "\n"
