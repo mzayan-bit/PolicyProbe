@@ -1,0 +1,33 @@
+name: Policy review
+on:
+  pull_request:
+    paths:
+      - 'examples/**'
+      - 'src/policyprobe/**'
+      - '.github/workflows/policy-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: current
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: base
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install ./current
+      - name: Compare policy documents
+        run: |
+          python -m policyprobe.change_report base/examples/returns/after current/examples/returns/after --output policy-change.json > policy-change.md
+          cat policy-change.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Run the bundled regression smoke check
+        run: |
+          policyprobe check --target flawed --output smoke.json > smoke.md
+          cat smoke.md >> "$GITHUB_STEP_SUMMARY"
