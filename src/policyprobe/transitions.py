@@ -34,3 +34,28 @@ class TransitionOracle:
             raise ValueError("required change needs disjoint outcome sets")
         if self.group == "clarify" and any(o.action != "clarify" for o in self.after):
             raise ValueError("clarification cases require a clarification outcome")
+
+
+@dataclass(frozen=True)
+class TransitionVerdict:
+    status: str
+    before_correct: bool | None
+    after_correct: bool | None
+    expected_group: str
+
+
+def score_transition(before: Outcome | None, after: Outcome | None,
+                     oracle: TransitionOracle) -> TransitionVerdict:
+    old_ok = None if before is None else before in oracle.before
+    new_ok = None if after is None else after in oracle.after
+    if old_ok is None or new_ok is None:
+        status = "incomplete"
+    elif old_ok and new_ok:
+        status = "correct_transition"
+    elif old_ok:
+        status = "introduced_failure"
+    elif new_ok:
+        status = "recovered"
+    else:
+        status = "persistent_failure"
+    return TransitionVerdict(status, old_ok, new_ok, oracle.group)
