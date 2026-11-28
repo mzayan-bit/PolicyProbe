@@ -131,3 +131,11 @@ The Policy review workflow compares examples/returns/after against the pull requ
 The workflow also runs the bundled flawed-shop smoke test and saves a replayable report. That smoke test uses the fixed demo rules. Editing arbitrary Markdown does not change the scripted bot or its scorer. The document comparison and the regression smoke result are separate evidence; automatic execution of newly interpreted policy rules remains pending.
 
 To reproduce the document comparison locally, run python -m policyprobe.change_report BEFORE_FOLDER AFTER_FOLDER --output policy-change.json. Existing report paths are preserved.
+
+## Inspect paired policy transitions
+
+Run python -m policyprobe.paired_demo after installation. It executes four scripted customers under both a 30-day policy and a 14-day policy with a premium exception. The output records separate snapshot hashes, outcomes, and elapsed times.
+
+The scorer checks each outcome against its own permitted set. It distinguishes correct transitions, introduced failures, persistent failures, recovery, and incomplete pairs. A premium customer wrongly declined twice is a persistent failure. The clarification case requires a specific membership question. Each bundled execution uses fresh state; custom paired execution callbacks must also isolate their environments.
+
+This is a deterministic demonstration of the research harness. Actual local-model paired runs, broader domain oracles, token accounting, and independent label review remain pending. The revised research protocol is in docs/research-plan.md.

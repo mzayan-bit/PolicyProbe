@@ -12,7 +12,7 @@ OLD = "Returns within 30 days."
 NEW = "Returns within 14 days. Premium customers retain 30 days."
 ACCEPT = Outcome("refund", (("refunded", "true"),))
 DECLINE = Outcome("decline", (("refunded", "false"),))
-CLARIFY = Outcome("clarify", (("question", "premium_status"), ("refunded", "false"))
+CLARIFY = Outcome("clarify", (("question", "premium_status"), ("refunded", "false")))
 
 
 def execute(customer, policy):
